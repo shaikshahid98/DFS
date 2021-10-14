@@ -3,6 +3,7 @@ var w=20;
 var grid=[];
 var stack=[];
 var current;
+// Created a setup for the canvas and displaying of the grid
 function setup() {
   createCanvas(1000, 1000);
   
@@ -17,7 +18,7 @@ function setup() {
   }
   current=grid[0];
 }
-
+// Created draw for the grid to be displayed and for the properties of the cell
 function draw() {
   background(255,255,255);
   for(var i=0;i<grid.length;i++){
@@ -25,11 +26,12 @@ function draw() {
   }
   current.visited=1;
   current.pos();
-  
+//   considering a new neighbour which is ot visited 
   var next= current.nkb();
   if(next)
   {
     removewall(current,next);
+//     created stack for pushig new unvisited cells
     stack.push(current);
     current=next;
   }
@@ -39,6 +41,7 @@ function draw() {
   }
   
 }
+// Created a function for removing a wall if the two cells are connected
 function removewall(a,b)
 {
   var x= b.i-a.i;
@@ -62,6 +65,7 @@ function ind(i,j)
   if(i<0 || j<0 || i > col-1 || j > row-1){ return -1;}
   return j + (i) * col;
 }
+// created  a cell function for keep trach of current cell position and also selection of the next cell which needs to be visited
 function Cell(i,j)
 {
   this.i=i;
@@ -100,7 +104,7 @@ function Cell(i,j)
       else return undefined;
     }
   }
-  
+//   Created a new function which gives the current postion of a cell for debugging purpose
   this.show = function()
   {
     var x= (this.i) * w;
